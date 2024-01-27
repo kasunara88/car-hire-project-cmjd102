@@ -1,2 +1,4 @@
-package lk.ijse.carhire.service;public interface SuperService {
+package lk.ijse.carhire.service;
+
+public interface SuperService {
 }

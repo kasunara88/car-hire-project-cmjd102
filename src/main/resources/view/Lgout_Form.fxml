@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DisplacementMap?>
+<?import javafx.scene.effect.FloatMap?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane fx:id="loging_RootNode" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.carhire.controller.LogoutFormController">
+    <children>
+        <ImageView fitHeight="546.0" fitWidth="877.0" layoutX="22.0" layoutY="32.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/car-rental-.jpeg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="77.0" fitWidth="279.0" layoutX="55.0" layoutY="45.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/pngkey.com-car-logo-png-670572.png" />
+            </image>
+        </ImageView>
+        <Label alignment="BOTTOM_LEFT" layoutX="260.0" layoutY="216.0" prefHeight="58.0" prefWidth="147.0" text="Username">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="64.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/username1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label alignment="BOTTOM_LEFT" layoutX="260.0" layoutY="296.0" prefHeight="58.0" prefWidth="147.0" text="Password">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="64.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/password1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+        <TextField fx:id="txt_userName" layoutX="435.0" layoutY="223.0" prefHeight="40.0" prefWidth="270.0" promptText="Username">
+            <font>
+                <Font name="Consolas Italic" size="14.0" />
+            </font></TextField>
+        <Button alignment="CENTER" layoutX="497.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnClickOnActionPerform" prefHeight="28.0" prefWidth="147.0" style="-fx-background-color: #e67e22;" text="Login">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="28.0" fitWidth="28.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/icons8-login-50.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DisplacementMap>
+                            <mapData>
+                                <FloatMap />
+                            </mapData>
+                            <input>
+                                <Glow />
+                            </input>
+                        </DisplacementMap>
+                    </effect>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <PasswordField fx:id="txt_UserPassword" layoutX="435.0" layoutY="305.0" prefHeight="40.0" prefWidth="270.0" promptText="Password">
+            <font>
+                <Font name="Consolas Italic" size="14.0" />
+            </font>
+        </PasswordField>
+        <Label layoutX="409.0" layoutY="443.0" prefHeight="29.0" prefWidth="309.0" text="Don't have an account? please Sign up">
+            <font>
+                <Font name="Consolas Italic" size="14.0" />
+            </font>
+        </Label>
+        <ImageView accessibleRole="BUTTON" fitHeight="40.0" fitWidth="43.0" layoutX="698.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/icons8-sign-up-64.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </ImageView>
+    </children>
 
 </AnchorPane>

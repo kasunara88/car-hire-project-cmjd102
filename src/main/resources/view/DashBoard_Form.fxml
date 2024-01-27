@@ -1,14 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane fx:id="dashboard_NodeRoot" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.carhire.controller.DashBoardController">
 
+    <children>
+        <ImageView fitHeight="90.0" fitWidth="284.0" layoutX="83.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/pngkey.com-car-logo-png-670572.png" />
+            </image>
+            <effect>
+                <Bloom threshold="0.22" />
+            </effect>
+        </ImageView>
+        <ImageView fitHeight="505.0" fitWidth="782.0" layoutX="267.0" layoutY="91.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/car-rental-.jpeg" />
+            </image>
+            <effect>
+                <Lighting bumpInput="$null" diffuseConstant="2.0" light="$null" specularConstant="0.0" specularExponent="40.0" surfaceScale="0.0" />
+            </effect>
+        </ImageView>
+        <Button alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="211.0" mnemonicParsing="false" onAction="#btn_Customer_OnActionPerforms" prefHeight="55.0" prefWidth="192.0" style="-fx-background-color: #63AECB;" text="Customer">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/user_profile.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Button>
+        <Button alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="277.0" mnemonicParsing="false" onAction="#btn_CarsClickOnActionPerform" prefHeight="55.0" prefWidth="192.0" style="-fx-background-color: #63AECB;" text="Cars">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/icons8-car-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Button>
+        <Button alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" onAction="#btn_RentClickOnAction_Perform" prefHeight="55.0" prefWidth="192.0" style="-fx-background-color: #63AECB;" text="Rent">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/icons8-car-rental-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Button>
+        <Line endX="100.0" endY="76.0" layoutX="114.0" layoutY="62.0" startX="100.0" startY="520.0" />
+        <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="15.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/loader%20(1).gif" />
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="dashboard_BodyRoot" layoutX="224.0" layoutY="144.0" prefHeight="440.0" prefWidth="950.0" />
+        <Button alignment="BOTTOM_LEFT" layoutX="110.0" layoutY="549.0" mnemonicParsing="false" onAction="#btn_logiutClickOnAction" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #e67e22;" text="Logout">
+            <font>
+                <Font name="Consolas Italic" size="14.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="21.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/Turn-Off-icon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#btn_CarCategory_ClickOnAction" prefHeight="55.0" prefWidth="192.0" style="-fx-background-color: #63AECB;" text="Car Catagory">
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/car.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Button>
+        <Label fx:id="user_name" layoutX="486.0" layoutY="49.0" prefHeight="47.0" prefWidth="192.0">
+            <graphic>
+                <ImageView fitHeight="47.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../car-hire-project/src/main/resources/image/user_profile.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font name="Consolas Italic" size="18.0" />
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

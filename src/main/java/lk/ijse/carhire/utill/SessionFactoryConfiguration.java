@@ -23,8 +23,8 @@ public class SessionFactoryConfiguration {
         Metadata metadata = new MetadataSources(standardRegistry)
                 .addAnnotatedClass(CustomerEntity.class)
                 .addAnnotatedClass(CarCategoryEntity.class)
-                .addAnnotatedClass(CarEntity.class)
-                .addAnnotatedClass(RentEntity.class)
+               .addAnnotatedClass(CarEntity.class)
+               .addAnnotatedClass(RentEntity.class)
                 .getMetadataBuilder()
                 .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
                 .build();
@@ -34,30 +34,7 @@ public class SessionFactoryConfiguration {
         return sessionFactory;
 
     }
-
-
-
     public static SessionFactory getSessionFactory(){
         return sessionFactory;
     }
 }
-
-
-//        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-//                //.configure("org/hibernate/example/hibernate.cfg.xml")
-//                .loadProperties("./cfg/application.properties")
-//                .build();
-//
-//        Metadata metadata = new MetadataSources(standardRegistry)
-//                .addAnnotatedClass(CustomerEntity.class)
-//                .addAnnotatedClass(CarCategoryEntity.class)
-//                .addAnnotatedClass(CarEntity.class)
-//                .addAnnotatedClass(RentEntity.class)
-//                .getMetadataBuilder()
-//                .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
-//                .build();
-//
-//        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
-//                .build();
-//
-//        return sessionFactory;

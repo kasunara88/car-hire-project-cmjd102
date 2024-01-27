@@ -1,2 +1,4 @@
-package lk.ijse.carhire.dao;public interface SuperDAO {
+package lk.ijse.carhire.dao;
+
+public interface SuperDAO {
 }

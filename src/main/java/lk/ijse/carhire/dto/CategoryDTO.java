@@ -1,2 +1,14 @@
-package lk.ijse.carhire.dto;public class CategoryDTO {
+package lk.ijse.carhire.dto;
+
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public class CategoryDTO {
+    private long category_id;
+    private String category_Name;
 }
+
