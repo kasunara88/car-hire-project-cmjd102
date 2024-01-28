@@ -43,7 +43,7 @@ public class CarDAOImpl implements CarDAO {
         try (Session session = SessionFactoryConfiguration.getSessionFactory().openSession()) {
             try {
                 transaction = session.beginTransaction();
-                session.merge(carEntity);
+                session.update(carEntity);
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) {
@@ -101,13 +101,5 @@ public class CarDAOImpl implements CarDAO {
             }
             throw new DataAccessException("Error getting all cars: " + e.getMessage(), e);
         }
-
-
-
-//        try (Session session = SessionFactoryConfiguration.getSessionFactory().openSession()) {
-//            return session.createQuery("FROM CarEntity").list();
-//        } catch (Exception e) {
-//            throw new DataAccessException("Error getting all cars: " + e.getMessage(), e);
-//        }
   }
     }

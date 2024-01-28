@@ -7,12 +7,25 @@ import java.time.LocalDate;
 
 public class RentListTable {
     private long rentId;
-    private CustomerDTO customerID;
-    private CarDTO carID;
+    private long customerID;
+    private long carID;
     private LocalDate startDate;
     private LocalDate endDate;
     private Double rentFee;
 
-    public RentListTable(long rentId, CustomerDTO customerID, CarDTO carID, String string, String string1, Double rentFee) {
-    }
+//    public RentListTable(
+//            long rentId,
+//            long customerId,
+//            long carId,
+//            String string,
+//            String string1,
+//            Double rentFee) {}
+
+//    public RentListTable(
+//            long rentId,
+//            CustomerDTO customerID,
+//            CarDTO carID,
+//            String string,
+//            String string1,
+//            Double rentFee) {}
 }

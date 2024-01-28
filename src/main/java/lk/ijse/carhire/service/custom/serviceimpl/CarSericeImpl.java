@@ -46,11 +46,14 @@ public class CarSericeImpl implements CarService {
         if (carDTO == null) {
             throw new IllegalArgumentException("CarDt0 cannot be null");
         }
-        CarCategoryEntity categoryEntity = convertToCarCategoryEntity(carDTO.getCategoryDto());
-        CarEntity carEntity = new CarEntity(
-                carDTO.getCarId(),
-                carDTO.getVehicleNumber(), carDTO.getBrand(), carDTO.getModel(),
-                carDTO.getYear(), carDTO.getRate(), categoryEntity);
+        CarEntity carEntity = new CarEntity();
+        carEntity.setCarID(carDTO.getCarId());
+        //carEntity.setCarCategory(convertToCarCategoryEntity(carDTO.getCategoryDto()));
+        carEntity.setVehicleNumber(carDTO.getVehicleNumber());
+        carEntity.setBrand(carDTO.getBrand());
+        carEntity.setModel(carDTO.getModel());
+        carEntity.setYear(carDTO.getYear());
+        carEntity.setDailyRate(carDTO.getRate());
         carDAO.update(carEntity);
     }
 
@@ -88,6 +91,7 @@ public class CarSericeImpl implements CarService {
         for (CarEntity entity : carEntityList) {
             CarDTO carDtoList = new CarDTO();
             carDtoList.setCarId(entity.getCarID());
+           // carDtoList.setCategoryDto(convertToCarCategoryDTO(entity.getCarCategory()));
             carDtoList.setVehicleNumber(entity.getVehicleNumber());
             carDtoList.setBrand(entity.getBrand());
             carDtoList.setModel(entity.getModel());
@@ -104,5 +108,12 @@ public class CarSericeImpl implements CarService {
         carCategoryEntity.setCategory_ID(categoryDto.getCategory_id());
         carCategoryEntity.setCategory_Name(categoryDto.getCategory_Name());
         return carCategoryEntity;
+    }
+
+    private CategoryDTO convertToCarCategoryDTO(CarCategoryEntity categoryEntity) {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setCategory_id(categoryEntity.getCategory_ID());
+        //categoryDTO.setCategory_Name(categoryEntity.getCategory_Name());
+        return categoryDTO;
     }
 }

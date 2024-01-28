@@ -214,9 +214,7 @@ public class RentFormController {
         for (RentDTO rentDTO : rentList) {
             LocalDate startDate = rentDTO.getRentDate();
             LocalDate endDate = rentDTO.getReturnDate();
-            var tableModeS = new RentTableModel() {
 
-            };
             var tableModel = new RentTableModel(
                     rentDTO.getRentId(),
                     rentDTO.getCustomerID().getCustomerId(), startDate, endDate,

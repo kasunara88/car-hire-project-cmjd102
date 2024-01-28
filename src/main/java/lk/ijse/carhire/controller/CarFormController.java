@@ -47,6 +47,8 @@ public class CarFormController {
 
     @FXML
     private TableColumn<CarTableModel, Long> col_CarID;
+    @FXML
+    private TableColumn<CarTableModel, Long> col_CategoryID;
 
     @FXML
     private TableColumn<CarTableModel, String> col_Model;
@@ -110,11 +112,11 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
             String vehicleNumber = vehicalNumber_Text.getText();
             String brand = brand_Text.getText();
             String model = model_Text.getText();
-            int year = Integer.parseInt(year_Text.getText());  // Corrected the field name
+            int year = Integer.parseInt(year_Text.getText());
             double dailyRate = Double.parseDouble(rate_Teaxt.getText());
 
-            CategoryDTO selectedCategory =  cmbo_Boxs.getSelectionModel().getSelectedItem();
-            var carDto = new CarDTO(carID, vehicleNumber, brand, model, year, dailyRate, selectedCategory);
+           // CategoryDTO selectedCategory =  cmbo_Boxs.getSelectionModel().getSelectedItem();
+            var carDto = new CarDTO(carID, vehicleNumber, brand, model, year, dailyRate);
             carService.carUpdate(carDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Car Update successfully!").show();
 
@@ -179,6 +181,7 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
 
     public void initialize() throws Exception {
         col_CarID.setCellValueFactory(new PropertyValueFactory<>("carId"));
+        //col_CategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
         col_Vehicalumber.setCellValueFactory(new PropertyValueFactory<>("vehicleNumber"));
         col_Brand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         col_Model.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -198,12 +201,13 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
             rate_Teaxt.setText("");
         }
 
-    public void loadAllCars() throws Exception{
+    public void loadAllCars() throws Exception {
         List<CarDTO> carList = carService.getAllCars();
         ObservableList<CarTableModel> observableList = FXCollections.observableArrayList();
         for (CarDTO carDto : carList) {
             var tableModel = new CarTableModel(
                     carDto.getCarId(),
+                    //carDto.getCategoryDto().getCategory_id(),
                     carDto.getVehicleNumber(),
                     carDto.getBrand(),
                     carDto.getModel(),
@@ -215,16 +219,21 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
 
     }
 
-    private static ObservableList<CarTableModel> getCarTableModels(List<CarDTO> carList) {
-        ObservableList<CarTableModel> obsList = FXCollections.observableArrayList();
-        for (CarDTO carDTO : carList) {
-            var tableModel = new CarTableModel(carDTO.getCarId(),
-                    carDTO.getVehicleNumber(), carDTO.getBrand(), carDTO.getModel(),
-                    carDTO.getYear(), carDTO.getRate());
-            obsList.add(tableModel);
-        }
-        return obsList;
-    }
+//    private static ObservableList<CarTableModel> getCarTableModels(List<CarDTO> carList) {
+//        ObservableList<CarTableModel> obsList = FXCollections.observableArrayList();
+//        for (CarDTO carDTO : carList) {
+//            var tableModel = new CarTableModel(
+//                    carDTO.getCarId(),
+//                    carDTO.getCategoryDto(),
+//                    carDTO.getVehicleNumber(),
+//                    carDTO.getBrand(),
+//                    carDTO.getModel(),
+//                    carDTO.getYear(),
+//                    carDTO.getRate());
+//            obsList.add(tableModel);
+//        }
+//        return obsList;
+//    }
 
     private void loadCarCategory() throws Exception {
         List<CategoryDTO> allCategoryCars = carCategoryService.getAllCarCategory();

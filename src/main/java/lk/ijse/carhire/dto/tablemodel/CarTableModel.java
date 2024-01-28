@@ -1,5 +1,6 @@
 package lk.ijse.carhire.dto.tablemodel;
 
+import lk.ijse.carhire.dto.CategoryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CarTableModel {
     private long carId;
+   // private long categoryID;
     private  String vehicleNumber;
     private  String brand;
     private  String model;
