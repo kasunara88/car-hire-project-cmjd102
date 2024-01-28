@@ -74,8 +74,8 @@ public class AllRentListFormController {
                     rentDTO.getRentId(),
                     rentDTO.getCustomerID().getCustomerId(),
                     rentDTO.getCarID().getCarId(),
-                    rentDTO.getRentDate().toString(), // Convert LocalDate to String as needed
-                    rentDTO.getReturnDate().toString(),   // Convert LocalDate to String as needed
+                    rentDTO.getRentDate(),
+                    rentDTO.getReturnDate(),
                     rentDTO.getRentFee()
             );
             rentTableModelList.add(rentTableModel);
