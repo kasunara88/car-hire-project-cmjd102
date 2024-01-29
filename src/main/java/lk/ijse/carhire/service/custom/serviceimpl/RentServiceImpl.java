@@ -5,15 +5,16 @@ import lk.ijse.carhire.dao.custom.CarDAO;
 import lk.ijse.carhire.dao.custom.CustomerDAO;
 import lk.ijse.carhire.dao.custom.RentDAO;
 import lk.ijse.carhire.dto.CarDTO;
-import lk.ijse.carhire.dto.CategoryDTO;
+
 import lk.ijse.carhire.dto.CustomerDTO;
 import lk.ijse.carhire.dto.RentDTO;
-import lk.ijse.carhire.entity.CarCategoryEntity;
+
 import lk.ijse.carhire.entity.CarEntity;
 import lk.ijse.carhire.entity.CustomerEntity;
 import lk.ijse.carhire.entity.RentEntity;
 import lk.ijse.carhire.service.custom.RentService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,7 @@ public class RentServiceImpl implements RentService {
         for (RentEntity entity : rentEntityList) {
             RentDTO rentDtoList = new RentDTO();
             rentDtoList.setRentId(entity.getRentalID());
+            rentDtoList.setCarID(convertToCarIDs(entity.getCarEntity()));
             rentDtoList.setCustomerID(convertToCustomerIDs(entity.getCustomerEntity()));
             rentDtoList.setRentDate(entity.getRentalStartDate());
             rentDtoList.setReturnDate(entity.getRentalEndDate());
@@ -86,9 +88,30 @@ public class RentServiceImpl implements RentService {
         return rentList;
     }
 
+   @Override
+   public void returnCar(long rentId, LocalDate returnDate) throws Exception{
+        if (rentId <= 0) {
+            throw new IllegalArgumentException("Invalid rent ID. Rent ID must be greater than 0.");
+        }
+
+        // Retrieve the Rent entity from the database
+        RentEntity rentEntity = rentDAO.search(rentId);
+                 new Exception("Rent not found with ID: " + rentId);
+
+        // Update the return date
+        rentEntity.setRentalEndDate(returnDate);
+        rentDAO.save(rentEntity);
+   }
+
     private CustomerDTO convertToCustomerIDs (CustomerEntity custDto) {
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setCustomerId(custDto.getCustID());
         return customerDTO;
+    }
+
+    private CarDTO convertToCarIDs (CarEntity carDto) {
+        CarDTO carDTO = new CarDTO();
+        carDTO.setCarId(carDTO.getCarId());
+        return carDTO;
     }
 }

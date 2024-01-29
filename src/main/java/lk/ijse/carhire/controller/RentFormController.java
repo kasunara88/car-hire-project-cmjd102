@@ -1,7 +1,6 @@
 package lk.ijse.carhire.controller;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +16,7 @@ import lk.ijse.carhire.dto.CarDTO;
 import lk.ijse.carhire.dto.CustomerDTO;
 import lk.ijse.carhire.dto.RentDTO;
 import lk.ijse.carhire.dto.tablemodel.RentTableModel;
-import lk.ijse.carhire.entity.CustomerEntity;
+
 import lk.ijse.carhire.service.ServiceFactory;
 import lk.ijse.carhire.service.custom.CarService;
 import lk.ijse.carhire.service.custom.CustomerService;
@@ -25,7 +24,8 @@ import lk.ijse.carhire.service.custom.RentService;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.sql.Date;
+
+
 import java.util.List;
 
 public class RentFormController {
@@ -77,10 +77,6 @@ public class RentFormController {
     RentService rentService = (RentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.RENT);
     CarService carService = (CarService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CAR);
     CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CUSTOMER);
-
-    public void btn_AddClickOnAction(ActionEvent actionEvent) {
-
-    }
 
     public void btn_RentClickOnAction(ActionEvent actionEvent) {
         try {
@@ -233,4 +229,31 @@ public class RentFormController {
         endDate_Picker.setValue(null);
 
     }
+
+    public void btn_ReturnCar_ClickOnAction(ActionEvent actionEvent) {
+                try {
+            long rentId = Long.parseLong(rentID_Text.getText());
+            LocalDate returnDate = LocalDate.now();
+
+            // Input validation
+            if (rentId <= 0) {
+                new Alert(Alert.AlertType.ERROR, "Invalid Rent ID. Please enter a valid number").show();
+                return;
+            }
+
+            // Call the service method to return the car
+            rentService.returnCar(rentId, returnDate);
+
+            new Alert(Alert.AlertType.CONFIRMATION, "Car returned successfully.").show();
+
+            // Reload the Rentals table or update the specific row in the table
+            loadRentTable();
+
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Rent ID. Please enter a valid number").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error returning the car: " + e.getMessage()).show();
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package lk.ijse.carhire.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,7 @@ import lk.ijse.carhire.dto.tablemodel.RentTableModel;
 import lk.ijse.carhire.service.ServiceFactory;
 import lk.ijse.carhire.service.custom.RentService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AllRentListFormController {
@@ -70,16 +72,22 @@ public class AllRentListFormController {
     private ObservableList<RentListTable> getRentTableModels(List<RentDTO> rentList) {
         ObservableList<RentListTable> rentTableModelList = FXCollections.observableArrayList();
         for (RentDTO rentDTO : rentList) {
-            RentListTable rentTableModel = new RentListTable(
+            LocalDate startDate = rentDTO.getRentDate();
+            LocalDate endDate = rentDTO.getReturnDate();
+
+            var tableModel = new RentListTable(
                     rentDTO.getRentId(),
                     rentDTO.getCustomerID().getCustomerId(),
                     rentDTO.getCarID().getCarId(),
-                    rentDTO.getRentDate(),
-                    rentDTO.getReturnDate(),
-                    rentDTO.getRentFee()
-            );
-            rentTableModelList.add(rentTableModel);
+                    startDate,
+                    endDate,
+                    rentDTO.getRentFee());
+            rentTableModelList.add(tableModel);
         }
         return rentTableModelList;
     }
+
+//    public void btn_RentListOnActionClick(ActionEvent actionEvent) {
+//        initialize();
+//    }
 }

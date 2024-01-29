@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 @Entity
 @Table(name = "Rental")
 @NoArgsConstructor

@@ -91,7 +91,7 @@ public class CarSericeImpl implements CarService {
         for (CarEntity entity : carEntityList) {
             CarDTO carDtoList = new CarDTO();
             carDtoList.setCarId(entity.getCarID());
-           // carDtoList.setCategoryDto(convertToCarCategoryDTO(entity.getCarCategory()));
+            carDtoList.setCategoryDto(convertToCarCategoryDTO(entity.getCarCategory()));
             carDtoList.setVehicleNumber(entity.getVehicleNumber());
             carDtoList.setBrand(entity.getBrand());
             carDtoList.setModel(entity.getModel());

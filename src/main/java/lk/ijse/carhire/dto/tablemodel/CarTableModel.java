@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CarTableModel {
     private long carId;
-   // private long categoryID;
+    private long categoryID;
     private  String vehicleNumber;
     private  String brand;
     private  String model;

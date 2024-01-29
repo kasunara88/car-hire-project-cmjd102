@@ -10,8 +10,10 @@ import javafx.util.Callback;
 import lk.ijse.carhire.dto.CarDTO;
 import lk.ijse.carhire.dto.CategoryDTO;
 import lk.ijse.carhire.dto.CustomerDTO;
+import lk.ijse.carhire.dto.RentDTO;
 import lk.ijse.carhire.dto.tablemodel.CarTableModel;
 import lk.ijse.carhire.dto.tablemodel.CustomerTableModel;
+import lk.ijse.carhire.dto.tablemodel.RentTableModel;
 import lk.ijse.carhire.service.ServiceFactory;
 import lk.ijse.carhire.service.custom.CarCategoryService;
 import lk.ijse.carhire.service.custom.CarService;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CarFormController {
@@ -115,7 +118,7 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
             int year = Integer.parseInt(year_Text.getText());
             double dailyRate = Double.parseDouble(rate_Teaxt.getText());
 
-           // CategoryDTO selectedCategory =  cmbo_Boxs.getSelectionModel().getSelectedItem();
+            //CategoryDTO selectedCategory =  cmbo_Boxs.getSelectionModel().getSelectedItem();
             var carDto = new CarDTO(carID, vehicleNumber, brand, model, year, dailyRate);
             carService.carUpdate(carDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Car Update successfully!").show();
@@ -181,7 +184,7 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
 
     public void initialize() throws Exception {
         col_CarID.setCellValueFactory(new PropertyValueFactory<>("carId"));
-        //col_CategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
+        col_CategoryID.setCellValueFactory(new PropertyValueFactory<>("categoryID"));
         col_Vehicalumber.setCellValueFactory(new PropertyValueFactory<>("vehicleNumber"));
         col_Brand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         col_Model.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -202,38 +205,52 @@ CarCategoryService carCategoryService = (CarCategoryService) ServiceFactory.getI
         }
 
     public void loadAllCars() throws Exception {
-        List<CarDTO> carList = carService.getAllCars();
-        ObservableList<CarTableModel> observableList = FXCollections.observableArrayList();
-        for (CarDTO carDto : carList) {
-            var tableModel = new CarTableModel(
-                    carDto.getCarId(),
-                    //carDto.getCategoryDto().getCategory_id(),
-                    carDto.getVehicleNumber(),
-                    carDto.getBrand(),
-                    carDto.getModel(),
-                    carDto.getYear(),
-                    carDto.getRate());
-            observableList.add(tableModel);
+        try {
+            List<CarDTO> rentList = carService.getAllCars();
+            if (rentList == null) {
+                new Alert(Alert.AlertType.ERROR, "No Rent found.").show();
+                return;
+            }
+
+            ObservableList<CarTableModel> obsList = getCarTableModels(rentList);
+            car_Table.setItems(obsList);
+        } catch (Exception e) {
+            // Log any exceptions that occur
+            new Alert(Alert.AlertType.ERROR, "Error loading car: " + e.getMessage()).show();
+            e.printStackTrace();
         }
-        car_Table.setItems(observableList);
+//        List<CarDTO> carList = carService.getAllCars();
+//        ObservableList<CarTableModel> observableList = FXCollections.observableArrayList();
+//        for (CarDTO carDto : carList) {
+//            var tableModel = new CarTableModel(
+//                    carDto.getCarId(),
+//                    //carDto.getCategoryDto().getCategory_id(),
+//                    carDto.getVehicleNumber(),
+//                    carDto.getBrand(),
+//                    carDto.getModel(),
+//                    carDto.getYear(),
+//                    carDto.getRate());
+//            observableList.add(tableModel);
+//        }
+//        car_Table.setItems(observableList);
 
     }
 
-//    private static ObservableList<CarTableModel> getCarTableModels(List<CarDTO> carList) {
-//        ObservableList<CarTableModel> obsList = FXCollections.observableArrayList();
-//        for (CarDTO carDTO : carList) {
-//            var tableModel = new CarTableModel(
-//                    carDTO.getCarId(),
-//                    carDTO.getCategoryDto(),
-//                    carDTO.getVehicleNumber(),
-//                    carDTO.getBrand(),
-//                    carDTO.getModel(),
-//                    carDTO.getYear(),
-//                    carDTO.getRate());
-//            obsList.add(tableModel);
-//        }
-//        return obsList;
-//    }
+    private static ObservableList<CarTableModel> getCarTableModels(List<CarDTO> carList) {
+        ObservableList<CarTableModel> obsList = FXCollections.observableArrayList();
+        for (CarDTO carDTO : carList) {
+           // LocalDate startDate = ren.getRentDate();
+           // LocalDate endDate = rentDTO.getReturnDate();
+
+            var tableModel = new CarTableModel(
+                    carDTO.getCarId(),
+                    carDTO.getCategoryDto().getCategory_id(),
+                    carDTO.getVehicleNumber(), carDTO.getBrand(),
+                    carDTO.getModel(),carDTO.getYear(), carDTO.getRate());
+            obsList.add(tableModel);
+        }
+        return obsList;
+    }
 
     private void loadCarCategory() throws Exception {
         List<CategoryDTO> allCategoryCars = carCategoryService.getAllCarCategory();
